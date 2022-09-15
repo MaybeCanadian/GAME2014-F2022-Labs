@@ -2,9 +2,9 @@
 [System.Serializable]
 public struct Boundry
 {
-    public float clampXMax;
-    public float clampXMin;
+    public float XMax;
+    public float XMin;
 
-    public float clampYMax;
-    public float clampYMin;
+    public float YMax;
+    public float YMin;
 }

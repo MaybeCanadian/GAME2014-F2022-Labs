@@ -34,8 +34,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void clampInBounds()
     {
-        float clampedX = Mathf.Clamp(transform.position.x, bounds.clampXMin, bounds.clampXMax);
-        float clampedY = Mathf.Clamp(transform.position.y, bounds.clampYMin, bounds.clampYMax);
+        float clampedX = Mathf.Clamp(transform.position.x, bounds.XMin, bounds.XMax);
+        float clampedY = Mathf.Clamp(transform.position.y, bounds.YMin, bounds.YMax);
 
         transform.position = new Vector3(clampedX, clampedY, transform.position.z);
     }
