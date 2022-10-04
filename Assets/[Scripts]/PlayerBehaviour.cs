@@ -10,21 +10,33 @@ public class PlayerBehaviour : MonoBehaviour
 
     public Vector2 startPosition = new Vector2(0.0f, -4.5f);
 
+    private Camera mainCamera;
+
     public Boundry bounds;
 
     private void Start()
     {
+        mainCamera = Camera.main;
         transform.position = startPosition;
     }
     void Update()
     {
-
+        //ConventionalInput();
+        MobileInput();
         Move();
-        clampInBounds();
+        ClampInBounds();
 
     }
 
-    private void Move()
+    private void MobileInput()
+    {
+        foreach(var touch in Input.touches)
+        {
+            transform.position = mainCamera.ScreenToWorldPoint(touch.position);
+        }
+    }
+
+    private void ConventionalInput()
     {
         float x = Input.GetAxisRaw("Horizontal") * HorizontalSpeed;
         float y = Input.GetAxisRaw("Vertical") * VerticalSpeed;
@@ -32,11 +44,16 @@ public class PlayerBehaviour : MonoBehaviour
         transform.position += new Vector3(x, y, 0) * Time.deltaTime;
     }
 
-    private void clampInBounds()
+    private void Move()
+    {
+        
+    }
+
+    private void ClampInBounds()
     {
         float clampedX = Mathf.Clamp(transform.position.x, bounds.XMin, bounds.XMax);
         float clampedY = Mathf.Clamp(transform.position.y, bounds.YMin, bounds.YMax);
 
-        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+        transform.position = new Vector3(clampedX, clampedY, 0);
     }
 }
