@@ -8,6 +8,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float HorizontalSpeed = 2.0f;
     public float VerticalSpeed = 2.0f;
 
+    public float LerpSpeed = 10.0f;
+
     public Vector2 startPosition = new Vector2(0.0f, -4.5f);
 
     private Camera mainCamera;
@@ -32,7 +34,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         foreach(var touch in Input.touches)
         {
-            transform.position = mainCamera.ScreenToWorldPoint(touch.position);
+            transform.position = Vector2.Lerp(transform.position, mainCamera.ScreenToWorldPoint(touch.position), Time.deltaTime * LerpSpeed);
         }
     }
 
